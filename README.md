@@ -75,3 +75,11 @@ Wayne Heaney - **wayne@xronlinux.com**
 ## Credits
 
 This driver wouldn't have been possible without the work of Tobias Frisch for his [base Linux driver](https://gitlab.com/TheJackiMonster/nrealAirLinuxDriver) that this uses under the hood, Matt Smith for his [Windows driver](https://github.com/MSmithDev/AirAPI_Windows/), and others that worked to [reverse engineer the glasses](https://github.com/edwatt/real_utilities/).
+
+## Maintained downstream branch
+
+The maintained branch is `iAdrian`; upstream `main` and tags remain unchanged.
+Pushes to this branch dispatch `archRepo/xr-driver-git` builds.
+Packages track this moving branch and require installed-artifact smoke checks
+before publication. Downstream fixes remain available independently of upstream
+review. Headless CI checks do not establish XR hardware or compositor stability.
