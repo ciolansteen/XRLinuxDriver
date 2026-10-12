@@ -8,8 +8,13 @@ concurrency:
   cancel-in-progress: true
 jobs:
   trigger-package:
-    runs-on: self-hosted
+    runs-on: source-dispatch
     timeout-minutes: 5
+    container:
+      image: git.ciolan.net/dockers/arch-builder:latest
+      credentials:
+        username: iAdrian
+        password: ${{ secrets.CI_TOKEN }}
     steps:
       - name: Checkout ci-templates
         uses: actions/checkout@v4
