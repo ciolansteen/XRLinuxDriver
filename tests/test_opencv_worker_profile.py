@@ -36,6 +36,8 @@ class OpenCVWorkerProfileTests(unittest.TestCase):
     def test_native_systemd_parser_accepts_sample(self):
         with tempfile.TemporaryDirectory(prefix="xr-profile-verify-") as name:
             directory = Path(name)
+            runtime = directory / "runtime"
+            runtime.mkdir(mode=0o700)
             unit = directory / "xr-driver.service"
             unit.write_text("[Unit]\nDescription=Inert profile syntax fixture\n"
                             "[Service]\nType=oneshot\nExecStart=/usr/bin/true\n")
@@ -43,7 +45,8 @@ class OpenCVWorkerProfileTests(unittest.TestCase):
             overrides.mkdir()
             (overrides / PROFILE.name).write_bytes(PROFILE.read_bytes())
             result = subprocess.run(["systemd-analyze", "--user", "verify", "--man=no", str(unit)],
-                                    env=os.environ | {"SYSTEMD_UNIT_PATH": str(directory) + ":"},
+                                    env=os.environ | {"SYSTEMD_UNIT_PATH": str(directory) + ":",
+                                                      "XDG_RUNTIME_DIR": str(runtime)},
                                     capture_output=True, text=True, timeout=15)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
