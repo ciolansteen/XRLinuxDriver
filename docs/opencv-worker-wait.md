@@ -46,7 +46,7 @@ fi
 systemctl --user show xr-driver.service -p DropInPaths -p Environment
 ```
 
-This manual configuration survives reboot. It is not performed by package installation. Other drop-ins can override the same variable; inspect the effective environment before comparing results. Also account for any separately created runtime override under `$XDG_RUNTIME_DIR/systemd/user/`, which disappears at reboot but may remain in effect during a persistent-profile test.
+This manual configuration survives reboot. It is not performed by package installation. If your pacman `NoExtract` rules omit `usr/share/doc/*`, use the source-checkout example instead or explicitly allow this package's documentation during installation. Other drop-ins can override the same variable; inspect the effective environment before comparing results. Also account for any separately created runtime override under `$XDG_RUNTIME_DIR/systemd/user/`, which disappears at reboot but may remain in effect during a persistent-profile test.
 
 ## Disable manually
 
