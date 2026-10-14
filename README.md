@@ -83,3 +83,8 @@ Pushes to this branch dispatch `archRepo/xr-driver-git` builds.
 Packages track this moving branch and require installed-artifact smoke checks
 before publication. Downstream fixes remain available independently of upstream
 review. Headless CI checks do not establish XR hardware or compositor stability.
+
+An optional [OpenCV worker waiting profile](docs/opencv-worker-wait.md) reduces
+active-wait CPU usage on applicable SDKs. It is shipped as an example, never
+enabled by default, and is not a fix for image jitter. Read the latency tradeoff
+and manual activation/rollback instructions before enabling it.
